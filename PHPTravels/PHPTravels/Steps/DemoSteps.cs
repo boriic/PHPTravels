@@ -34,13 +34,44 @@ namespace PHPTravels.Steps
             switch (sPage.ToLower())
             {
                 case "google":
-                    VerifyMethods.VerifyPageURL("https://www.google");
+                    VerifyMethods.VerifyPageURL(DemoMap.Page_Google);
                     break;
 
                 default:
                     throw new Exception("Page not found");
             }
         }
+
+        [When(@"I click on the ""([^""]*)"" button")]
+        public void WhenIClickOnTheButton(string sButton)
+        {
+            switch (sButton.ToLower())
+            {
+                case "accept cookies":
+                    SetMethods.Click(DemoMap.btnAcceptCookies);
+                    break;
+
+                default:
+                    throw new Exception("Button not found");
+            }
+        }
+
+        [Then(@"the ""([^""]*)"" textbox should be displayed, enabled and empty")]
+        public void ThenTheTextboxShouldBeDisplayedEnabledAndEmpty(string sTextbox)
+        {
+            switch (sTextbox.ToLower())
+            {
+                case "search":
+                    VerifyMethods.Displayed(DemoMap.TextBox_Search);
+                    VerifyMethods.Enabled(DemoMap.TextBox_Search);
+                    VerifyMethods.Empty(DemoMap.TextBox_Search, false);
+                    break;
+
+                default:
+                    throw new Exception("Textbox not found");
+            }
+        }
+
 
     }
 }

@@ -14,5 +14,6 @@ namespace PHPTravels.Map
 
         public static IWebElement TextBox_Search => Driver.WebDriver.FindElement(By.Name("q"));
         public static IWebElement Button_Search => Driver.WebDriver.FindElement(By.Name("btnK"));
+        public static IWebElement btnAcceptCookies => Driver.WebDriver.FindElement(By.Id("L2AGLb"));
     }
 }

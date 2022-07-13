@@ -98,6 +98,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  testRunner.Then("the \"Google\" page should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+#line 7
+ testRunner.When("I click on the \"Accept cookies\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 8
+ testRunner.Then("the \"Search\" textbox should be displayed, enabled and empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
             }
             this.ScenarioCleanup();
         }
