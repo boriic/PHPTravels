@@ -1,0 +1,21 @@
+﻿<RunSettings>
+	<TestRunParameters>
+
+		<!--Path to the Chrome driver-->
+		<Parameter name="WebDriverPath" value="C:\Users\Filip\Desktop\Automation"/>
+		<!--Path where the Log will be created-->
+		<Parameter name="LogPath" value="C:\Users\Filip\Desktop\Automation"/>
+		<!--Web browser that is used for testing - chrome, firefox and edge are available-->
+		<Parameter name="Browser" value="chrome"/>
+
+		<!--Base page url-->
+		<Parameter name="Page" value="https://www.phptravels.net/"/>
+
+		<!--Credentials for the page-->
+		<!--Email-->
+		<Parameter name="Email" value="user@phptravels.com"/>
+		<!--Password-->
+		<Parameter name="Password" value="demouser"/>
+
+	</TestRunParameters>
+</RunSettings>
