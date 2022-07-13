@@ -33,26 +33,28 @@ namespace UI.Logger
         public static void CreateLog()
         {
             string sValue = "";
-
+            int iVerification = 1;
             foreach (Log step in lSteps)
             {
+                if (!step.bVerification)
+                {
+                    iVerification = 1;
+                }
                 if (step.bError)
                 {
-                    sValue += "**********";
-                    sValue += "      " + step.sStepName + "      ";
-                    sValue += "**********\n";
+                    sValue += "     *";
+                    sValue += "   " + "Error occurred: " + step.sStepName + Environment.NewLine;
                 }
                 else if (step.bVerification)
                 {
-                    sValue += "     ----------";
-                    sValue += "   " + step.sStepName;
-                    sValue += "     ----------\n";
+                    sValue += "     •";
+                    sValue += "   " + (step.iStepNumber - 1) + "." + iVerification + " " + step.sStepName + Environment.NewLine;
+                    iVerification++;
                 }
                 else
                 {
-                    sValue += "----------";
-                    sValue += step.iStepNumber.ToString() + ". " + step.sStepName;
-                    sValue += "----------\n";
+                    sValue += "• ";
+                    sValue += step.iStepNumber.ToString() + ". " + step.sStepName + Environment.NewLine;
                 }
             }
 

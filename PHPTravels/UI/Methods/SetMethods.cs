@@ -18,16 +18,17 @@ namespace UI.Methods
             {
                 element.SendKeys(sValue);
                 Thread.Sleep(iWaitMili);
-                //Logger
+
+                Logger.Logger.AddLog($"Enter Text ({sValue})");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //Logger
-                throw new Exception($"Error occured while entering text: {ex.Message}");
+                Logger.Logger.AddLog($"Error occured while entering text: {sValue}", bError: true);
+                throw new Exception($"Error occured while entering text: {sValue}");
             }
         }
 
-        public static void Click(IWebElement element, bool bMoveToElement, int iWaitMili = 1500)
+        public static void Click(IWebElement element, bool bMoveToElement = false, int iWaitMili = 1500)
         {
             try
             {
@@ -35,20 +36,24 @@ namespace UI.Methods
                 {
                     Actions actions = new Actions(Driver.WebDriver);
                     actions.MoveToElement(element).Click().Build().Perform();
+
                     Thread.Sleep(iWaitMili);
-                    //logger
+
+                    Logger.Logger.AddLog($"Click (Move to element ({bMoveToElement}))");
                 }
                 else
                 {
                     element.Click();
+
                     Thread.Sleep(iWaitMili);
-                    //logger
+
+                    Logger.Logger.AddLog($"Click");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //logger
-                throw new Exception($"Error occured while clicking the element: {ex.Message}");
+                Logger.Logger.AddLog($"Error occured while clicking the element: {element.TagName}", bError: true);
+                throw new Exception($"Error occured while clicking the element: {element.TagName}");
             }
         }
 
@@ -58,13 +63,14 @@ namespace UI.Methods
             {
                 var selectElement = new SelectElement(element);
                 selectElement.SelectByValue(sOption);
-                //logger
+
+                Logger.Logger.AddLog($"Select Option By Value ({sOption})");
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                //logger
-                throw new Exception($"Error occured while selecting option: {ex.Message}");
+                Logger.Logger.AddLog($"Error occured while selecting option: {sOption}", bError: true);
+                throw new Exception($"Error occured while selecting option: {sOption}");
             }
         }
 
@@ -74,27 +80,14 @@ namespace UI.Methods
             {
                 var selectElement = new SelectElement(element);
                 selectElement.SelectByIndex(iIndex);
-                //logger
+
+                Logger.Logger.AddLog($"Select Option By Index ({iIndex})");
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                //logger
-                throw new Exception($"Error occured while selecting option: {ex.Message}");
-            }
-        }
-
-        public static void Clear(IWebElement element)
-        {
-            try
-            {
-                element.Clear();
-                //Logger
-            }
-            catch (Exception ex)
-            {
-                //Logger
-                throw new Exception($"Error occured while clearing text: {ex.Message}");
+                Logger.Logger.AddLog($"Error occured while selecting option on index: {iIndex}", bError: true);
+                throw new Exception($"Error occured while selecting option on index: {iIndex}");
             }
         }
     }

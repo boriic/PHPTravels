@@ -29,5 +29,33 @@ namespace UI.Methods
             }
 
         }
+        public static void Clear(IWebElement element)
+        {
+            try
+            {
+                element.Clear();
+                Logger.Logger.AddLog($"Clear ({element.TagName}: {element.Text})", bError: true);
+            }
+            catch (Exception ex)
+            {
+                Logger.Logger.AddLog($"Error occured while clearing text: {ex.Message}", bError: true);
+                throw new Exception($"Error occured while clearing text: {ex.Message}");
+            }
+        }
+        public static void NavigateToPage(string sUrl)
+        {
+            try
+            {
+                Driver.WebDriver.Navigate().GoToUrl(sUrl);
+                Driver.WebDriver.Manage().Window.Maximize();
+
+                Logger.Logger.AddLog($"Navigate To Page ({sUrl})");
+            }
+            catch (Exception)
+            {
+                Logger.Logger.AddLog($"Error occured while navigating to: {sUrl}!", bError: true);
+                throw new Exception($"Error occured while navigating to: {sUrl}.");
+            }
+        }
     }
 }

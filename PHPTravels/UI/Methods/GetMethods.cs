@@ -15,24 +15,24 @@ namespace UI.Methods
             {
                 return element.Text;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //logger
-                throw new Exception($"Error occured while getting the element text: {ex.Message}");
+                Logger.Logger.AddLog($"Error occured while getting the element text");
+                throw new Exception($"Error occured while getting the element text");
             }
 
         }
 
-        public string GetAttributeValue(IWebElement element, string sAttribute = "value")
+        public static string GetAttributeValue(IWebElement element, string sAttribute = "value")
         {
             try
             {
                 return element.GetAttribute(sAttribute);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //logger
-                throw new Exception($"Error occured while getting the attribute value: {ex.Message}");
+                Logger.Logger.AddLog($"Error occured while getting the attribute value: {sAttribute}");
+                throw new Exception($"Error occured while getting the attribute value: {sAttribute}");
             }
         }
     }
