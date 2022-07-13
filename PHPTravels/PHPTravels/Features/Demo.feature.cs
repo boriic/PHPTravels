@@ -104,6 +104,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 8
  testRunner.Then("the \"Search\" textbox should be displayed, enabled and empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+#line 9
+ testRunner.When("I enter \"bla bla bla\" into \"Search\" textbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 10
+ testRunner.Then("the \"Search\" textbox should contain \"bla bla bla\" value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
             }
             this.ScenarioCleanup();
         }

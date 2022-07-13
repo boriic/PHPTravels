@@ -64,7 +64,7 @@ namespace PHPTravels.Steps
                 case "search":
                     VerifyMethods.Displayed(DemoMap.TextBox_Search);
                     VerifyMethods.Enabled(DemoMap.TextBox_Search);
-                    VerifyMethods.Empty(DemoMap.TextBox_Search, false);
+                    VerifyMethods.Empty(DemoMap.TextBox_Search);
                     break;
 
                 default:
@@ -72,6 +72,33 @@ namespace PHPTravels.Steps
             }
         }
 
+        [When(@"I enter ""([^""]*)"" into ""([^""]*)"" textbox")]
+        public void WhenIEnterIntoTextbox(string sValue, string sTextbox)
+        {
+            switch (sTextbox.ToLower())
+            {
+                case "search":
+                    SetMethods.EnterText(DemoMap.TextBox_Search, sValue);
+                    break;
+
+                default:
+                    throw new Exception("Textbox not found");
+            }
+        }
+
+        [Then(@"the ""([^""]*)"" textbox should contain ""([^""]*)"" value")]
+        public void ThenTheTextboxShouldContainValue(string sTextbox, string sValue)
+        {
+            switch (sTextbox.ToLower())
+            {
+                case "search":
+                    VerifyMethods.VerifyText(DemoMap.TextBox_Search, sValue);
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
     }
 }

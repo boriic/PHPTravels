@@ -93,8 +93,8 @@ namespace UI.Methods
 
             if (!sElementValue.Equals(sValue))
             {
-                Logger.Logger.AddLog($"Element value not as expected. Element text is: {sElementValue}, expected text is {sValue}", true, true);
-                throw new Exception($"Element value not as expected. Element text is: {sElementValue}, expected text is {sValue}");
+                Logger.Logger.AddLog($"Element value not as expected. Element text is: {sElementValue}, expected text is: {sValue}", true, true);
+                throw new Exception($"Element value not as expected. Element text is: {sElementValue}, expected text is: {sValue}");
             }
 
             Logger.Logger.AddLog($"Verify Text ({sValue})", bVerification: true);
@@ -109,8 +109,8 @@ namespace UI.Methods
 
             if (!sElementValue.Contains(sValue))
             {
-                Logger.Logger.AddLog($"Element value does not contain expected text. Element text is: {sElementValue}, expected text is {sValue}", true, true);
-                throw new Exception($"Element value does not contain expected text. Element text is: {sElementValue}, expected text is {sValue}");
+                Logger.Logger.AddLog($"Element value does not contain expected text. Element text is: {sElementValue}, expected text is: {sValue}", true, true);
+                throw new Exception($"Element value does not contain expected text. Element text is: {sElementValue}, expected text is: {sValue}");
             }
 
             Logger.Logger.AddLog($"Verify Text Contains ({sValue})", bVerification: true);
@@ -123,8 +123,8 @@ namespace UI.Methods
 
             if (selectedOption != sOption)
             {
-                Logger.Logger.AddLog($"Selected option not as expected. Selected option is {selectedOption}, expected option is {sOption}", true, true);
-                throw new Exception($"Selected option not as expected. Selected option is {selectedOption}, expected option is {sOption}");
+                Logger.Logger.AddLog($"Selected option not as expected. Selected option is: {selectedOption}, expected option is: {sOption}", true, true);
+                throw new Exception($"Selected option not as expected. Selected option is: {selectedOption}, expected option is: {sOption}");
             }
 
             Logger.Logger.AddLog($"Verify Selected Option ({sOption})", bVerification: true);
