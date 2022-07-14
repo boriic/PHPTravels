@@ -39,6 +39,14 @@ namespace PHPTravels.Steps
                     VerifyMethods.VerifyPageURL(PHPTravelsMap.Tours.PHPTravelsToursPage);
                     break;
 
+                case "random tour":
+                    VerifyMethods.VerifyPageURL(Helpers.sRandomTourUrl);
+                    break;
+
+                case "booking":
+                    VerifyMethods.VerifyPageURL(PHPTravelsMap.Booking.PHPTravelsBookingPage);
+                    break;
+
                 default:
                     throw new Exception("Page not found");
             }
@@ -110,6 +118,10 @@ namespace PHPTravels.Steps
                     SetMethods.Click(PHPTravelsMap.Tours.btnSearch, true);
                     break;
 
+                case "book now":
+                    SetMethods.Click(PHPTravelsMap.Tours.btnBookNow, true);
+                    break;
+
                 default:
                     throw new Exception("Button not found");
             }
@@ -155,6 +167,11 @@ namespace PHPTravels.Steps
                 case "remove child":
                     VerifyMethods.Displayed(PHPTravelsMap.Tours.btnRemoveChild);
                     VerifyMethods.Enabled(PHPTravelsMap.Tours.btnRemoveChild);
+                    break;
+
+                case "book now":
+                    VerifyMethods.Displayed(PHPTravelsMap.Tours.btnBookNow);
+                    VerifyMethods.Enabled(PHPTravelsMap.Tours.btnBookNow);
                     break;
 
                 default:
@@ -224,9 +241,10 @@ namespace PHPTravels.Steps
             switch (sMenuItem.ToLower())
             {
                 case "tours":
-                    Thread.Sleep(4000);
 
                     SetMethods.ClickOnMenuItem(PHPTravelsMap.Dashboard.wrpMenu, "Tours");
+
+                    Thread.Sleep(4000);
                     break;
 
                 default:
@@ -247,6 +265,10 @@ namespace PHPTravels.Steps
                     Thread.Sleep(3000);
 
                     VerifyMethods.VerifySelectedOption(PHPTravelsMap.Tours.ddTravellers, sValue, false);
+                    break;
+
+                case "adults":
+                    VerifyMethods.VerifySelectedOption(PHPTravelsMap.Tours.ddAdults, sValue);
                     break;
 
                 default:
@@ -311,6 +333,10 @@ namespace PHPTravels.Steps
                     Helpers.SelectFromDestinationDropdownByValue(PHPTravelsMap.Tours.wrpDestinationResults, sValue);
                     break;
 
+                case "adults":
+                    SetMethods.SelectOptionByValue(PHPTravelsMap.Tours.ddAdults, "2");
+                    break;
+
                 default:
                     throw new Exception("Dropdown not found");
             }
@@ -324,6 +350,10 @@ namespace PHPTravels.Steps
             {
                 case "destination":
                     VerifyMethods.VerifySelectedOption(PHPTravelsMap.Tours.ddDestination, sValue);
+                    break;
+
+                case "adults":
+                    VerifyMethods.VerifySelectedOption(PHPTravelsMap.Tours.ddAdults, sValue);
                     break;
 
                 default:
@@ -375,5 +405,16 @@ namespace PHPTravels.Steps
             }
         }
 
+        [When(@"I click on random tour")]
+        public void WhenIClickOnRandomTour()
+        {
+            if (PHPTravelsMap.Tours.btnCookies.Displayed)
+                PHPTravelsMap.Tours.btnCookies.Click();
+
+            Thread.Sleep(4000);
+
+            Helpers.ClickOnRandomTourAndRetreiveUrl(PHPTravelsMap.Tours.wrpTours);
+
+        }
     }
 }

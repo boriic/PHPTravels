@@ -64,3 +64,11 @@ Scenario: Click on random tour and book
 	And the top menu should contain "Tours" menu item
 	When I click on the "Tours" menu item
 	Then the "Tours" page should be displayed
+	When I click on random tour
+	Then the "Random Tour" page should be displayed
+	And the "Adults" dropdown should be displayed, enabled and contains "1" value
+	And the "Book Now" button should be displayed and enabled
+	When I click on "2" option in "Adults" dropdown
+	Then the "Adults" dropdown should have "2" selected
+	When I click on the "Book Now" button
+	Then the "Booking" page should be displayed

@@ -12,12 +12,13 @@ namespace UI.Logger
 
         private static List<Log> lSteps = new List<Log>();
 
-        public static void AddLog(string sLogEntry, bool bVerification = false, bool bError = false)
+        public static void AddLog(string sLogEntry, bool bVerification = false, bool bError = false, bool bScenario = false)
         {
             Log log = new Log();
             log.sStepName = sLogEntry;
             log.bVerification = bVerification;
             log.bError = bError;
+            log.bScenario = bScenario;
 
             if (lSteps.Count == 0)
             {
@@ -36,6 +37,10 @@ namespace UI.Logger
             int iVerification = 1;
             foreach (Log step in lSteps)
             {
+                if (step.bScenario)
+                {
+                    sValue += step.sStepName.ToUpper() + Environment.NewLine + Environment.NewLine;
+                }
                 if (!step.bVerification)
                 {
                     iVerification = 1;

@@ -12,5 +12,6 @@ namespace UI.Logger
         public string sStepName { get; set; }
         public bool bVerification { get; set; }
         public bool bError { get; set; }
+        public bool bScenario { get; set; }
     }
 }

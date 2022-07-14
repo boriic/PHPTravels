@@ -11,6 +11,7 @@ namespace UI.Methods
 {
     public class Helpers
     {
+        public static string sRandomTourUrl = "";
         public static void MoveToElement(IWebElement element, bool bUseJavaScript)
         {
             if (!bUseJavaScript)
@@ -97,6 +98,33 @@ namespace UI.Methods
             }
 
             Logger.Logger.AddLog($"Verify Random Tour Location ({sValue})", true);
+        }
+
+        public static void ClickOnRandomTourAndRetreiveUrl(IWebElement element)
+        {
+            try
+            {
+                IList<IWebElement> lTours = element.FindElements(By.XPath("div[@class='col-lg-4']"));
+
+                int iRandomTour = new Random().Next(0, lTours.Count - 1);
+
+                sRandomTourUrl = lTours[iRandomTour].FindElement(By.TagName("a")).GetAttribute("href");
+
+                Actions actions = new Actions(Driver.WebDriver);
+
+                actions.MoveToElement(lTours[iRandomTour]).Build().Perform();
+
+                Thread.Sleep(3000);
+
+                lTours[iRandomTour].Click();
+
+                Logger.Logger.AddLog("Click On Random Tour And Retreive Url");
+            }
+            catch (Exception)
+            {
+                Logger.Logger.AddLog($"Error occurred while trying to click on random tour", bError: true);
+                throw new Exception($"Error occurred while trying to click on random tour");
+            }
         }
     }
 }

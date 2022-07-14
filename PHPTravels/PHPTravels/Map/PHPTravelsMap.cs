@@ -45,12 +45,20 @@ namespace PHPTravels.Map
             public static IWebElement btnRemoveChild => Driver.WebDriver.FindElement(By.XPath("//*[@id='tours-search']/div/div/div[3]/div/div/div/div/div[2]/div/div/div[1]/i"));
             public static IWebElement lblAdultsCount => Driver.WebDriver.FindElement(By.XPath("//*[@id='tours_adults']"));
             public static IWebElement wrpDestinationResults => Driver.WebDriver.FindElement(By.Id("select2-tours_city-results"));
-
+            public static IWebElement wrpTours => Driver.WebDriver.FindElement(By.XPath("//div[@class='row padding-top-50px']"));
+            public static IWebElement btnCookies => Driver.WebDriver.FindElement(By.Id("cookie_stop"));
+            public static IWebElement ddAdults => Driver.WebDriver.FindElement(By.Id("adults"));
+            public static IWebElement btnBookNow => Driver.WebDriver.FindElement(By.XPath("//button[@type='submit']"));
 
             public class Results
             {
                 public static IWebElement wrpResultList => Driver.WebDriver.FindElement(By.XPath("//section[@id='data']//ul"));
             }
+        }
+
+        public class Booking
+        {
+            public static string PHPTravelsBookingPage => "https://www.phptravels.net/tours/booking";
         }
     }
 }

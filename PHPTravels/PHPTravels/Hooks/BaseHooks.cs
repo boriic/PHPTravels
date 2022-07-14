@@ -7,6 +7,11 @@ namespace PHPTravels.Hooks
     [Binding]
     public class BaseHooks
     {
+        [BeforeScenario]
+        public static void BeforeScenario()
+        {
+            Logger.AddLog(ScenarioContext.Current.ScenarioInfo.Tags[0] +": " + ScenarioContext.Current.ScenarioInfo.Title, bScenario: true);
+        }
 
         [BeforeTestRun]
         public static void BeforeTestRun()
