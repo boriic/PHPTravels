@@ -28,64 +28,6 @@ namespace PHPTravels.Steps
             }
         }
 
-        [Then(@"the ""([^""]*)"" page should be displayed")]
-        public void ThenThePageShouldBeDisplayed(string sPage)
-        {
-            switch (sPage.ToLower())
-            {
-                case "google":
-                    VerifyMethods.VerifyPageURL(DemoMap.Page_Google);
-                    break;
-
-                default:
-                    throw new Exception("Page not found");
-            }
-        }
-
-        [When(@"I click on the ""([^""]*)"" button")]
-        public void WhenIClickOnTheButton(string sButton)
-        {
-            switch (sButton.ToLower())
-            {
-                case "accept cookies":
-                    SetMethods.Click(DemoMap.btnAcceptCookies);
-                    break;
-
-                default:
-                    throw new Exception("Button not found");
-            }
-        }
-
-        [Then(@"the ""([^""]*)"" textbox should be displayed, enabled and empty")]
-        public void ThenTheTextboxShouldBeDisplayedEnabledAndEmpty(string sTextbox)
-        {
-            switch (sTextbox.ToLower())
-            {
-                case "search":
-                    VerifyMethods.Displayed(DemoMap.TextBox_Search);
-                    VerifyMethods.Enabled(DemoMap.TextBox_Search);
-                    VerifyMethods.Empty(DemoMap.TextBox_Search);
-                    break;
-
-                default:
-                    throw new Exception("Textbox not found");
-            }
-        }
-
-        [When(@"I enter ""([^""]*)"" into ""([^""]*)"" textbox")]
-        public void WhenIEnterIntoTextbox(string sValue, string sTextbox)
-        {
-            switch (sTextbox.ToLower())
-            {
-                case "search":
-                    SetMethods.EnterText(DemoMap.TextBox_Search, sValue);
-                    break;
-
-                default:
-                    throw new Exception("Textbox not found");
-            }
-        }
-
         [Then(@"the ""([^""]*)"" textbox should contain ""([^""]*)"" value")]
         public void ThenTheTextboxShouldContainValue(string sTextbox, string sValue)
         {

@@ -116,18 +116,30 @@ namespace UI.Methods
             Logger.Logger.AddLog($"Verify Text Contains ({sValue})", bVerification: true);
         }
 
-        public static void VerifySelectedOption(IWebElement element, string sOption)
+        public static void VerifySelectedOption(IWebElement element, string sOption, bool bSelectElement = true)
         {
-            SelectElement selectElement = new SelectElement(element);
-            string selectedOption = selectElement.SelectedOption.ToString();
-
-            if (selectedOption != sOption)
+            if (bSelectElement)
             {
-                Logger.Logger.AddLog($"Selected option not as expected. Selected option is: {selectedOption}, expected option is: {sOption}", true, true);
-                throw new Exception($"Selected option not as expected. Selected option is: {selectedOption}, expected option is: {sOption}");
-            }
+                SelectElement selectElement = new SelectElement(element);
+                string selectedOption = selectElement.SelectedOption.Text;
 
-            Logger.Logger.AddLog($"Verify Selected Option ({sOption})", bVerification: true);
+                if (!selectedOption.Contains(sOption))
+                {
+                    Logger.Logger.AddLog($"Selected option not as expected. Selected option is: {selectedOption}, expected option is: {sOption}", true, true);
+                    throw new Exception($"Selected option not as expected. Selected option is: {selectedOption}, expected option is: {sOption}");
+                }
+                Logger.Logger.AddLog($"Verify Selected Option ({sOption})", true);
+            }
+            else
+            {
+                string sDefaultValue = element.FindElement(By.TagName("p")).Text;
+                if (!sDefaultValue.Contains(sOption))
+                {
+                    Logger.Logger.AddLog($"Selected option not as expected. Selected option is: {sDefaultValue}, expected option is: {sOption}", true, true);
+                    throw new Exception($"Selected option not as expected. Selected option is: {sDefaultValue}, expected option is: {sOption}");
+                }
+                Logger.Logger.AddLog($"Verify Selected Option ({sOption})", true);
+            }
         }
 
         public static void VerifyPageURL(string sUrl)
@@ -150,6 +162,33 @@ namespace UI.Methods
             }
 
             Logger.Logger.AddLog($"Verify Page URL Contains ({sUrl})", bVerification: true);
+        }
+
+        public static void VerifyMenuItemExist(IWebElement menuElement, string sMenuItem)
+        {
+            IList<IWebElement> lItems = menuElement.FindElements(By.TagName("li"));
+
+            if (!lItems.Any(item => item.Text == sMenuItem))
+            {
+                Logger.Logger.AddLog($"Menu item {sMenuItem} doesn't exist", bError: true);
+                throw new Exception($"Menu item doesn't contain {sMenuItem}");
+            }
+
+            Logger.Logger.AddLog($"Verify Menu Item Exist {sMenuItem}");
+        }
+
+        public static void VerifyDatePickerWithCurrentDate(IWebElement datePickerElement)
+        {
+            string sValue = datePickerElement.GetAttribute("value");
+
+            string sCurrentDate = DateTime.Now.ToString("dd-MM-YYYY");
+
+            if (sValue != sCurrentDate)
+            {
+                Logger.Logger.AddLog($"Date picker value not correct. Current value: {sValue}, expected value: {sCurrentDate}", bError: true);
+            }
+
+            Logger.Logger.AddLog($"Date picker value not correct. Current value: {sValue}, expected value: {sCurrentDate}");
         }
     }
 }

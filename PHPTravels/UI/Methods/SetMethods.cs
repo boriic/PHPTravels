@@ -90,5 +90,20 @@ namespace UI.Methods
                 throw new Exception($"Error occured while selecting option on index: {iIndex}");
             }
         }
+
+        public static void ClickOnMenuItem(IWebElement menuElement, string sMenuItem)
+        {
+            IList<IWebElement> lItems = menuElement.FindElements(By.TagName("li"));
+
+            if (!lItems.Any(item => item.Text == sMenuItem))
+            {
+                Logger.Logger.AddLog($"Menu item doesn't contain {sMenuItem}", bError: true);
+                throw new Exception($"Menu item doesn't contain {sMenuItem}");
+            }
+
+            lItems.FirstOrDefault(item => item.Text == sMenuItem).Click();
+
+            Logger.Logger.AddLog($"Click On Menu Item {sMenuItem}");
+        }
     }
 }

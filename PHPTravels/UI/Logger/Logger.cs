@@ -43,7 +43,7 @@ namespace UI.Logger
                 if (step.bError)
                 {
                     sValue += "     *";
-                    sValue += "   " + "Error occurred: " + step.sStepName + Environment.NewLine;
+                    sValue += "   " + (step.iStepNumber - 1) + "." + iVerification + " " + "Error occurred: " + step.sStepName + Environment.NewLine;
                 }
                 else if (step.bVerification)
                 {

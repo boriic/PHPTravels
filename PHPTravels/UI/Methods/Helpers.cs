@@ -38,7 +38,7 @@ namespace UI.Methods
             }
             catch (Exception ex)
             {
-                Logger.Logger.AddLog($"Error occured while clearing text: {ex.Message}", bError: true);
+                Logger.Logger.AddLog($"Error occured while clearing text", bError: true);
                 throw new Exception($"Error occured while clearing text: {ex.Message}");
             }
         }
@@ -56,6 +56,18 @@ namespace UI.Methods
                 Logger.Logger.AddLog($"Error occured while navigating to: {sUrl}!", bError: true);
                 throw new Exception($"Error occured while navigating to: {sUrl}.");
             }
+        }
+        public static void VerifySearchResults(IWebElement element, string sOption)
+        {
+            IList<IWebElement> lSearchResults = element.FindElements(By.TagName("li"));
+
+            if (!lSearchResults.Any(item => item.Text == sOption))
+            {
+                Logger.Logger.AddLog($"Search result doesn't contain {sOption}", bError:true);
+                throw new Exception($"Search result doesn't contain {sOption}");
+            }
+
+            Logger.Logger.AddLog($"Search result doesn't contain {sOption}", true);
         }
     }
 }
