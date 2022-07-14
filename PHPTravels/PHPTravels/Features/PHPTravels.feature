@@ -23,7 +23,7 @@ Scenario: Search for destination and verify location
 	When I click on the "Tours" menu item
 	Then the "Tours" page should be displayed
 	And the "Destination" dropdown should be displayed, enabled and contains "Search by City" value
-	And the "Check-in" datepicker should be displayed and enabled and contains current date
+	And the "Check-in" datepicker should be displayed and enabled
 	And the "Travellers" dropdown should be displayed, enabled and contains "Travellers 1" value
 	And the "Search" button should be displayed and enabled
 	When I click on the "Destination" dropdown
@@ -43,3 +43,24 @@ Scenario: Search for destination and verify location
 	When I click on the "Search" button
 	Then the "Search Result List" should be displayed
 	And the random tour from the list should contain "Istanbul" as the location
+
+@TC002
+Scenario: Click on random tour and book
+	Given I navigate to the PHPTravels page
+	Then the "PHPTravels" page should be displayed
+	And the "Login" button should be displayed and enabled
+	When I click on the "Login" button
+	Then the "Login" page should be displayed
+	And the "Email" textbox should be displayed, enabled and empty
+	And the "Password" textbox should be displayed, enabled and empty
+	And the "LoginUser" button should be displayed and enabled
+	When I enter corresponding string into "Email" textbox
+	Then the "Email" textbox should contain corresponding string
+	When I enter corresponding string into "Password" textbox
+	Then the "Password" textbox should contain corresponding string
+	When I click on the "LoginUser" button
+	Then the "PHPTravels Dashboard" page should be displayed
+	And the top menu should be displayed
+	And the top menu should contain "Tours" menu item
+	When I click on the "Tours" menu item
+	Then the "Tours" page should be displayed

@@ -174,21 +174,7 @@ namespace UI.Methods
                 throw new Exception($"Menu item doesn't contain {sMenuItem}");
             }
 
-            Logger.Logger.AddLog($"Verify Menu Item Exist {sMenuItem}");
-        }
-
-        public static void VerifyDatePickerWithCurrentDate(IWebElement datePickerElement)
-        {
-            string sValue = datePickerElement.GetAttribute("value");
-
-            string sCurrentDate = DateTime.Now.ToString("dd-MM-YYYY");
-
-            if (sValue != sCurrentDate)
-            {
-                Logger.Logger.AddLog($"Date picker value not correct. Current value: {sValue}, expected value: {sCurrentDate}", bError: true);
-            }
-
-            Logger.Logger.AddLog($"Date picker value not correct. Current value: {sValue}, expected value: {sCurrentDate}");
+            Logger.Logger.AddLog($"Verify Menu Item Exist ({sMenuItem})");
         }
     }
 }

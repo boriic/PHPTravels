@@ -102,6 +102,14 @@ namespace PHPTravels.Steps
                     SetMethods.Click(PHPTravelsMap.Login.btnLogin);
                     break;
 
+                case "add adults":
+                    SetMethods.Click(PHPTravelsMap.Tours.btnAddAdults, true);
+                    break;
+
+                case "search":
+                    SetMethods.Click(PHPTravelsMap.Tours.btnSearch, true);
+                    break;
+
                 default:
                     throw new Exception("Button not found");
             }
@@ -119,7 +127,7 @@ namespace PHPTravels.Steps
                     VerifyMethods.Enabled(PHPTravelsMap.Home.btnLogin);
                     break;
 
-                case "LoginUser":
+                case "loginuser":
                     VerifyMethods.Displayed(PHPTravelsMap.Login.btnLogin);
                     VerifyMethods.Enabled(PHPTravelsMap.Login.btnLogin);
                     break;
@@ -129,8 +137,28 @@ namespace PHPTravels.Steps
                     VerifyMethods.Enabled(PHPTravelsMap.Tours.btnSearch);
                     break;
 
-                default:
+                case "add adults":
+                    VerifyMethods.Displayed(PHPTravelsMap.Tours.btnAddAdults);
+                    VerifyMethods.Enabled(PHPTravelsMap.Tours.btnAddAdults);
                     break;
+
+                case "remove adults":
+                    VerifyMethods.Displayed(PHPTravelsMap.Tours.btnRemoveAdults);
+                    VerifyMethods.Enabled(PHPTravelsMap.Tours.btnRemoveAdults);
+                    break;
+
+                case "add child":
+                    VerifyMethods.Displayed(PHPTravelsMap.Tours.btnAddChild);
+                    VerifyMethods.Enabled(PHPTravelsMap.Tours.btnAddChild);
+                    break;
+
+                case "remove child":
+                    VerifyMethods.Displayed(PHPTravelsMap.Tours.btnRemoveChild);
+                    VerifyMethods.Enabled(PHPTravelsMap.Tours.btnRemoveChild);
+                    break;
+
+                default:
+                    throw new Exception("Button not found");
             }
         }
 
@@ -148,7 +176,7 @@ namespace PHPTravels.Steps
                     break;
 
                 default:
-                    break;
+                    throw new Exception("Textbox not found");
             }
         }
 
@@ -166,7 +194,7 @@ namespace PHPTravels.Steps
                     break;
 
                 default:
-                    break;
+                    throw new Exception("Textbox not found");
             }
         }
 
@@ -186,7 +214,7 @@ namespace PHPTravels.Steps
                     break;
 
                 default:
-                    break;
+                    throw new Exception("Menu not found");
             }
         }
 
@@ -196,11 +224,13 @@ namespace PHPTravels.Steps
             switch (sMenuItem.ToLower())
             {
                 case "tours":
+                    Thread.Sleep(4000);
+
                     SetMethods.ClickOnMenuItem(PHPTravelsMap.Dashboard.wrpMenu, "Tours");
                     break;
 
                 default:
-                    break;
+                    throw new Exception("Menu not found");
             }
         }
 
@@ -213,10 +243,6 @@ namespace PHPTravels.Steps
                     VerifyMethods.VerifySelectedOption(PHPTravelsMap.Tours.ddDestination, sValue);
                     break;
 
-                case "check-in":
-                    VerifyMethods.VerifyDatePickerWithCurrentDate(PHPTravelsMap.Tours.dpCheckIn);
-                    break;
-
                 case "travellers":
                     Thread.Sleep(3000);
 
@@ -224,17 +250,7 @@ namespace PHPTravels.Steps
                     break;
 
                 default:
-                    break;
-            }
-        }
-
-        [Then(@"the ""([^""]*)"" datepicker should be displayed and enabled and contains current date")]
-        public void ThenTheDatepickerShouldBeDisplayedAndEnabledAndContainsCurrentDate(string sDatePicker)
-        {
-            switch (sDatePicker.ToLower())
-            {
-                default:
-                    break;
+                    throw new Exception("Dropdown not found");
             }
         }
 
@@ -247,8 +263,12 @@ namespace PHPTravels.Steps
                     SetMethods.Click(PHPTravelsMap.Tours.ddDestination, true);
                     break;
 
-                default:
+                case "travellers":
+                    SetMethods.Click(PHPTravelsMap.Tours.ddTravellers, true);
                     break;
+
+                default:
+                    throw new Exception("Datepicker not found");
             }
         }
 
@@ -262,7 +282,7 @@ namespace PHPTravels.Steps
                     break;
 
                 default:
-                    break;
+                    throw new Exception("Textbox not found");
             }
         }
 
@@ -278,7 +298,7 @@ namespace PHPTravels.Steps
                     break;
 
                 default:
-                    break;
+                    throw new Exception("Dropdown not found");
             }
         }
 
@@ -287,8 +307,12 @@ namespace PHPTravels.Steps
         {
             switch (sDropdown.ToLower())
             {
-                default:
+                case "destination":
+                    Helpers.SelectFromDestinationDropdownByValue(PHPTravelsMap.Tours.wrpDestinationResults, sValue);
                     break;
+
+                default:
+                    throw new Exception("Dropdown not found");
             }
         }
 
@@ -298,19 +322,21 @@ namespace PHPTravels.Steps
         {
             switch (sDropdown.ToLower())
             {
-                default:
+                case "destination":
+                    VerifyMethods.VerifySelectedOption(PHPTravelsMap.Tours.ddDestination, sValue);
                     break;
+
+                default:
+                    throw new Exception("Dropdown not found");
             }
         }
 
         [Then(@"the adults count should be ""([^""]*)""")]
         public void ThenTheAdultsCountShouldBe(string sAdultsCount)
         {
-            switch (sAdultsCount.ToLower())
-            {
-                default:
-                    break;
-            }
+            VerifyMethods.VerifyText(PHPTravelsMap.Tours.lblAdultsCount, sAdultsCount);
+
+            SetMethods.Click(PHPTravelsMap.Tours.ddTravellers, true);
         }
 
         [Then(@"the ""([^""]*)"" should be displayed")]
@@ -318,21 +344,36 @@ namespace PHPTravels.Steps
         {
             switch (sElement.ToLower())
             {
-                default:
+                case "search result list":
+                    VerifyMethods.Displayed(PHPTravelsMap.Tours.Results.wrpResultList);
                     break;
+
+                default:
+                    throw new Exception("Element not found");
             }
         }
 
         [Then(@"the random tour from the list should contain ""([^""]*)"" as the location")]
         public void ThenTheRandomTourFromTheListShouldContainAsTheLocation(string sValue)
         {
-            switch (sValue.ToLower())
-            {
-                default:
-                    break;
-            }
+            Helpers.VerifyRandomTourLocation(PHPTravelsMap.Tours.Results.wrpResultList, sValue);
         }
 
+        [Then(@"the ""([^""]*)"" datepicker should be displayed and enabled")]
+        public void ThenTheDatepickerShouldBeDisplayedAndEnabled(string sDatePicker)
+        {
+            switch (sDatePicker.ToLower())
+            {
+                case "check-in":
+                    VerifyMethods.Displayed(PHPTravelsMap.Tours.dpCheckIn);
+                    VerifyMethods.Enabled(PHPTravelsMap.Tours.dpCheckIn);
+                    break;
+
+                default:
+                    throw new Exception("Date Picker not found");
+
+            }
+        }
 
     }
 }

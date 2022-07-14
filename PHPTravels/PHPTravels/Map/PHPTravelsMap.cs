@@ -35,7 +35,7 @@ namespace PHPTravels.Map
             public static string PHPTravelsToursPage => "https://www.phptravels.net/tours";
 
             public static IWebElement ddDestination => Driver.WebDriver.FindElement(By.Id("tours_city"));
-            public static IWebElement dpCheckIn => Driver.WebDriver.FindElement(By.Id("date"));
+            public static IWebElement dpCheckIn => Driver.WebDriver.FindElement(By.XPath("//input[@id='date']"));
             public static IWebElement ddTravellers => Driver.WebDriver.FindElement(By.XPath("//*[@id='tours-search']/div/div/div[3]/div/div/div/a"));
             public static IWebElement btnSearch => Driver.WebDriver.FindElement(By.Id("submit"));
             public static IWebElement txtDestination => Driver.WebDriver.FindElement(By.XPath("/html/body/span/span/span[1]/input"));

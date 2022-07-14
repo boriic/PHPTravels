@@ -53,8 +53,8 @@ namespace UI.Methods
             }
             catch (Exception)
             {
-                Logger.Logger.AddLog($"Error occured while navigating to: {sUrl}!", bError: true);
-                throw new Exception($"Error occured while navigating to: {sUrl}.");
+                Logger.Logger.AddLog($"Error occured while navigating to: ({sUrl})!", bError: true);
+                throw new Exception($"Error occured while navigating to: ({sUrl}).");
             }
         }
         public static void VerifySearchResults(IWebElement element, string sOption)
@@ -63,11 +63,40 @@ namespace UI.Methods
 
             if (!lSearchResults.Any(item => item.Text == sOption))
             {
-                Logger.Logger.AddLog($"Search result doesn't contain {sOption}", bError:true);
-                throw new Exception($"Search result doesn't contain {sOption}");
+                Logger.Logger.AddLog($"Search result doesn't contain ({sOption})", bError:true);
+                throw new Exception($"Search result doesn't contain ({sOption})");
             }
 
-            Logger.Logger.AddLog($"Search result doesn't contain {sOption}", true);
+            Logger.Logger.AddLog($"Verify Search Results ({sOption})", true);
+        }
+
+        public static void SelectFromDestinationDropdownByValue(IWebElement element, string sOption)
+        {
+            IList<IWebElement> lDestinations = element.FindElements(By.TagName("li"));
+
+            if(!lDestinations.Any(item => item.Text == sOption))
+            {
+                Logger.Logger.AddLog($"Dropdown doesn't contain ({sOption})", bError: true);
+                throw new Exception($"Dropdown doesn't contain ({sOption})");
+            }
+            lDestinations.FirstOrDefault(item => item.Text == sOption).Click();
+
+            Logger.Logger.AddLog($"Select From Destination Dropdown By Value ({sOption})", true);
+        }
+
+        public static void VerifyRandomTourLocation(IWebElement element, string sValue)
+        {
+            IList<IWebElement> lResults = element.FindElements(By.TagName("li"));
+
+            string sLocation = lResults[new Random().Next(0, 24)].FindElement(By.TagName("p")).Text;
+
+            if (sLocation != sValue)
+            {
+                Logger.Logger.AddLog($"Random tour doesn't contain location ({sValue})", bError: true);
+                throw new Exception($"Random tour doesn't contain location ({sValue})");
+            }
+
+            Logger.Logger.AddLog($"Verify Random Tour Location ({sValue})", true);
         }
     }
 }
